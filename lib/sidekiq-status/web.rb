@@ -139,12 +139,7 @@ if Sidekiq.major_version > 6
   end
 else
   Sidekiq::Web.register(Sidekiq::Status::Web)
-  if Sidekiq::Web.tabs.is_a?(Array)
-    # For sidekiq < 2.5
-    Sidekiq::Web.tabs << "statuses"
-  else
-    Sidekiq::Web.tabs["Statuses"] = "statuses"
-  end
+  Sidekiq::Web.tabs["Statuses"] = "statuses"
 end
 
 ["per_page", "sort_by", "sort_dir", "status"].each do |key|
