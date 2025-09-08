@@ -1,5 +1,5 @@
 <% require 'cgi'; def h(v); CGI.escape_html(v.to_s); end %>
-<%= style_tag "statuses/stylesheets/styles.css" %>
+<link rel="stylesheet" href="/statuses/stylesheets/styles.css" media="screen"/>
 <h3>
   Job Status: <%= h @status["jid"] %>
   <span class='label label-<%= h @status["label"] %>'>

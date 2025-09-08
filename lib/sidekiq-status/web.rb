@@ -84,19 +84,18 @@ module Sidekiq::Status
           )
           h[:class] = "sorted_#{sort_dir}" if sort_by == h[:id]
         end
-
-        erb(:statuses, views: VIEWS)
+        erb(sidekiq_status_template(:statuses, view: VIEWS))
       end
 
       app.get '/statuses/:jid' do
         job = Sidekiq::Status::get_all safe_route_params(:jid)
 
         if job.empty?
-          throw :halt, [404, {"Content-Type" => "text/html"}, [erb(:status_not_found, views: VIEWS)]]
+          throw :halt, [404, {"Content-Type" => "text/html"}, [erb(sidekiq_status_template(:status_not_found, view: VIEWS))]]
         else
           @status = add_details_to_status(job)
 
-          erb(:status, views: VIEWS)
+          erb(sidekiq_status_template(:status, view: VIEWS))
         end
       end
 

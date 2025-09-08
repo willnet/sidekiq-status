@@ -72,6 +72,11 @@ module Sidekiq::Status
       def has_sort_by?(value)
         ["worker", "status", "update_time", "pct_complete", "message", "args"].include?(value)
       end
+
+      def sidekiq_status_template(name, view:)
+        path = File.join(view, name.to_s) + ".erb"
+        File.open(path).read
+      end
     end
   end
 end
